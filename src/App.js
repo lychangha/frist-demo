@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Clock } from './Clock';
 import { Toggle } from './Toggle';
-
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Checkbox from '@mui/material/Checkbox';
 
 class Test extends Component {
   constructor(props) {
@@ -52,36 +54,36 @@ class Test extends Component {
     })
    
   }
-
  
-
   render() {
     return (
       <div>
         <div>
-          <input value={this.state.inputValue} onChange={this.inputChange.bind(this)} />
-          <button onClick={this.addList.bind(this)}> 增加</button>
+          <TextField required id="outlined-required" label="请输入内容" size='small' value={this.state.inputValue} onChange={this.inputChange.bind(this)} />
+          <Button variant="contained" onClick={this.addList.bind(this)}>增加</Button>
         </div>
         <ul>
           <div>未完成事项</div>
           {
-            this.state.list.map((item, index) => {
-              return <li key={index}><input type="checkbox" checked={this.state.checked} onChange={this.inputList.bind(this,index)}/> {item} <input type="button" value="删除" onClick={this.deleteItem.bind(this,index)}/></li>
+            this.state.list.map((item, index) => { 
+              return <li key={index}><Checkbox onChange={this.inputList.bind(this,index)}  checked={this.state.checked}/> {item} <Button variant="contained"  sx={{height:'22px'}} onClick={this.deleteItem.bind(this,index)}>删除</Button></li>
             })
           }
           <div>已完成事项</div>
           {
             this.state.list1.map((item, index) => {
-              return <li key={index}><input type="checkbox" name="checkbox" checked="checked"/> {item} <input type="button" value="删除" onClick={this.deleteItem1.bind(this,index)}/></li>
+              return <li key={index}><Checkbox  checked="checked"/> {item} <Button variant="contained" sx={{height:'22px'}} onClick={this.deleteItem1.bind(this,index)}>删除</Button></li>
             })
           }
         </ul>
         <Clock></Clock>
         <Toggle></Toggle>
+        
       </div>
     );
   }
 }
+
 export default Test;
 
 
